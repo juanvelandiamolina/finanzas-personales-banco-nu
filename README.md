@@ -8,8 +8,7 @@ PDF Nu ──► finanzas_nu (Python) ──► Libro de Excel ──► Power B
 ```
 
 > **Datos de ejemplo.** Todo lo que trae el repositorio es inventado: el libro `datos_demo/LIBRO FINANCIERO DEMO.xlsx`
-> y los datos guardados en `bi/Finanzas Nu.pbix` (personas, comercios, montos y fechas). Tus extractos, tu libro y
-> tu `.env` nunca se suben: `.gitignore` los deja fuera.
+> y los datos guardados en `bi/Finanzas Nu.pbix` (personas, comercios, montos y fechas).
 
 ![Resumen Financiero del informe de Power BI con los datos de ejemplo](docs/img/pagina-02-resumen-financiero.png)
 
