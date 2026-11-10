@@ -1,0 +1,33 @@
+{
+  "_comentario": [
+    "Reglas de la Tarjeta de Crédito Nu. Mismo orden que reglas_cuenta.json:",
+    "  1. 'especificas'  2. historial de la hoja de tarjeta  3. 'genericas'  4. 'sinClasificar'.",
+    "Campos: patron (regex sobre la descripción), tipo (Compra, Pago, Devolución, Ajuste a favor, Beneficio, Avance),",
+    "signo ('-' = compra / avance, '+' = pago, devolución, ajuste o beneficio), revisar (marca la fila para mirarla).",
+    "Las compras usan las mismas subcategorías que la hoja Ingresos y Gastos; se añaden Salud, Educación y Transporte."
+  ],
+  "especificas": [
+    { "tipo": "Pago", "categoria": "Pago Tarjeta", "subcategoria": "Pago" },
+    { "tipo": "Devolución", "categoria": "Abono", "subcategoria": "Devolución" },
+    { "tipo": "Ajuste a favor", "categoria": "Abono", "subcategoria": "Ajuste a favor" },
+    { "tipo": "Beneficio", "categoria": "Abono", "subcategoria": "Beneficio" },
+    { "tipo": "Avance", "categoria": "Gasto Variable", "subcategoria": "Avance", "revisar": true },
+
+    { "patron": "(Anthropic|Claude|Disney|Youtube|Google \\*Play|Apple\\.Com|Amazon Prime|Netflix|Spotify|\\bHbo\\b|\\bMax\\b|Crunchyroll|Paramount|Openai|Chatgpt)", "signo": "-", "categoria": "Gasto Fijo", "subcategoria": "Suscripciones" },
+    { "patron": "(Comcel|Movistar|\\bClaro\\b|\\bTigo\\b|\\bEtb\\b|Enel|Codensa|Vanti|Acueducto)", "signo": "-", "categoria": "Gasto Fijo", "subcategoria": "Servicios" },
+    { "patron": "(Cruz Verde|Drogas|Drogueria|Farmatodo|Denti|Oral|Odont|Clinic|Locatel|Colsubsidio|Optica|Laboratorio)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Salud" },
+    { "patron": "(\\bUniv|Coursera|Platzi|Udemy|Colegio|Instituto)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Educación" },
+    { "patron": "(Cine|Procinal|Multiplex|Imax|Ticket|Eneba|Steam|Playstation|Xbox|Funjungle|Teatro)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Ocio" },
+    { "patron": "(Pointcolombia|Terpel|Texaco|Primax|Esso|Uber|Didi|Cabify|Transmilenio|Peaje|Parqueadero)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Transporte" },
+    { "patron": "(Dollarcity|Miniso|\\bBosi\\b|Koaj|Zara|Arturo Calle|Studio F|Adidas|Nike|Bata|Shein)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Ropa" },
+    { "patron": "(Oxxo|\\bD1\\b|Exito|Olimpica|Supermercado|Dominos|Pizza|\\bKfc\\b|Crepes|Dunkin|\\bWok\\b|\\bAra\\b|Carulla|Jeronimo|Rappi|Mc ?Donald|Frisby|Juan Valdez|Panader|Restaurante|Bold Sa\\*Mercado)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Alimentación" }
+  ],
+  "genericas": [
+    { "patron": "(Amazon|Mercado ?Pago|Mercadoli|Merpag|Pagseguro|Homecenter)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Compras" },
+    { "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Compras", "revisar": true }
+  ],
+  "sinClasificar": {
+    "+": { "categoria": "Abono", "subcategoria": "Otros abonos", "revisar": true },
+    "-": { "categoria": "Gasto Variable", "subcategoria": "Sin Clasificar", "revisar": true }
+  }
+}

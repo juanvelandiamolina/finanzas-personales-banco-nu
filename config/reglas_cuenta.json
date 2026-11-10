@@ -1,0 +1,37 @@
+{
+  "_comentario": [
+    "Cómo se clasifica cada movimiento, en este orden:",
+    "  1. 'especificas': la primera regla cuyo patrón (regex, sin distinguir mayúsculas) case con la descripción y cuyo signo coincida.",
+    "  2. Historial: si la misma descripción ya está en la hoja Ingresos y Gastos con el mismo sentido, se copia la categoría que más veces se le puso.",
+    "  3. 'genericas': igual que 1, pero son reglas amplias ('Enviaste a ...' => Transferencias).",
+    "  4. 'sinClasificar' según el signo.",
+    "signo: '+' entra dinero, '-' sale dinero, se omite = cualquiera. 'revisar': true marca la fila para mirarla a mano."
+  ],
+  "especificas": [
+    { "patron": "^Enviaste a INMOBILIARIA", "signo": "-", "categoria": "Gasto Fijo", "subcategoria": "Arriendo" },
+    { "patron": "^Enviaste a (COMUNICACION CELULAR COMCEL|EMPRESA DE TELECOMUNICACIONES)", "signo": "-", "categoria": "Gasto Fijo", "subcategoria": "Servicios" },
+
+    { "patron": "^Compra en .*(GOOGLE \\*PLAY|YOUTUBE|NETFLIX|SPOTIFY|DISNEY|HBO|\\bMAX\\b|PRIME VIDEO|APPLE\\.COM|CRUNCHYROLL|PARAMOUNT|CHATGPT|OPENAI)", "signo": "-", "categoria": "Gasto Fijo", "subcategoria": "Suscripciones" },
+    { "patron": "^Compra en .*(\\bD1\\b|OXXO|\\bARA\\b|JERONIMO MARTINS|EXITO|CARULLA|OLIMPICA|JUSTO Y BUENO|SURTIMAX|ARCHIE|BROASTER|SARKU|BRASERI|HAMBURGUES|FRISBY|KFC|MC ?DONALD|CREPES|JUAN VALDEZ|DOMINOS|PIZZA|RAPPI|DIDI FOOD|PANADERIA|RESTAURANTE)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Alimentación" },
+    { "patron": "^Compra en .*(MINISO|DOLLARCITY|BATA|F D S|KOAJ|VELEZ|ZARA|H&M|ARTURO CALLE|STUDIO F|ADIDAS|NIKE|TENNIS|OFFCORSS|PAT PRIMO)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Ropa" },
+    { "patron": "^Compra en .*(TICKET|FUNJUNGLE|CINE|CINEMARK|PROCINAL|TEATRO|BOLETA)", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Ocio" },
+
+    { "patron": "^Impuesto del 4x1000", "signo": "-", "categoria": "Gasto Fijo", "subcategoria": "Impuestos" },
+    { "patron": "^Impuesto del 4x1000", "signo": "+", "categoria": "Ingreso", "subcategoria": "Reembolsos" },
+    { "patron": "^Rendimientos Nu", "signo": "+", "categoria": "Ingreso", "subcategoria": "Rendimientos" },
+    { "patron": "^Pagaste tu tarjeta", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Tarjeta de Crédito" },
+    { "patron": "^Retiro", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Retiro Efectivo" }
+  ],
+  "genericas": [
+    { "patron": "^Recibiste de", "signo": "+", "categoria": "Ingreso", "subcategoria": "Transferencia Recibida" },
+    { "patron": "^Enviaste a", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Transferencias" },
+    { "patron": "^Pago a", "signo": "-", "categoria": "Gasto Fijo", "subcategoria": "Servicios" },
+    { "patron": "(Reembols|Devoluci)", "signo": "+", "categoria": "Ingreso", "subcategoria": "Reembolsos" },
+    { "patron": "^Depositaste", "signo": "+", "categoria": "Ingreso", "subcategoria": "Depósitos" },
+    { "patron": "^Compra en", "signo": "-", "categoria": "Gasto Variable", "subcategoria": "Compras", "revisar": true }
+  ],
+  "sinClasificar": {
+    "+": { "categoria": "Ingreso", "subcategoria": "Otros Ingresos", "revisar": true },
+    "-": { "categoria": "Gasto Variable", "subcategoria": "Sin Clasificar", "revisar": true }
+  }
+}
